@@ -1,8 +1,3 @@
-- 👋 Hi, I’m Bobby Rein
-- 👀 I’m interested in React and Next.js development. I like to build user-friendly and applications. I also would like to start building games on iOS.
-- 🌱 I’m currently learning how to develope scalable applications with React.
-- 📫 How to reach me: you can shoot me an email @ bobbyrein97@gmail.com
-
 ## SpriteKit QB Pocket Game Setup Checklist (Swift, iPhone)
 
 - Create project: **iOS > Game > SpriteKit**, language **Swift**, interface **SwiftUI** or **UIKit** (either is fine), devices **iPhone only**, orientation **Portrait** (or lock to Landscape if that’s your target feel).
