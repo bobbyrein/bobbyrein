@@ -1,4 +1,27 @@
-- 👋 Hi, I’m Bobby Rein
-- 👀 I’m interested in React and Next.js development. I like to build user-friendly and applications. I also would like to start building games on iOS.
-- 🌱 I’m currently learning how to develope scalable applications with React.
-- 📫 How to reach me: you can shoot me an email @ bobbyrein97@gmail.com
+## SpriteKit QB Pocket Game Setup Checklist (Swift, iPhone)
+
+- Create project: **iOS > Game > SpriteKit**, language **Swift**, interface **SwiftUI** or **UIKit** (either is fine), devices **iPhone only**, orientation **Portrait** (or lock to Landscape if that’s your target feel).
+- Set a fixed design resolution in `GameScene` for consistent tuning (e.g., **390x844 points** iPhone 14 baseline), and use `.resizeFill` in `SKView` plus camera-based layout for notches/safe areas.
+- Configure scene scale mode early: `.resizeFill` for adaptive layouts, or `.aspectFill` if you want strictly framed gameplay with slight crop.
+- Add a world root node structure on day 1: `worldNode`, `fieldNode`, `actorsNode`, `projectilesNode`, `fxNode`, `uiNode`.
+- Set physics world defaults: `gravity = .zero`, `speed = 1.0`, and `contactDelegate = self`.
+- Define physics categories with bitmasks (`QB`, `Ball`, `Receiver`, `Defender`, `LOS`, `Boundary`, `CatchZone`) in a single `PhysicsCategory.swift` file.
+- Keep collisions selective: use `collisionBitMask` only for bodies that should physically push; use `contactTestBitMask` for gameplay events (catch, sack, interception, LOS crossing).
+- Use lightweight physics bodies (circles/rects) over texture-based bodies for stable 60 FPS and predictable contact logic.
+- Establish update loop split: `input -> movement -> AI/routes -> ball sim -> collision resolution -> state machine transitions -> HUD`.
+- Implement state machines up front: `GameState` (pregame, snap, livePlay, deadBall, results) and `PlayerState` (dropback, setFeet, throw, scramble, sacked).
+- Build input zones as independent systems: left-half virtual joystick for QB movement; right-half swipe recognizer for throw vector/power/release quality.
+- Start ballistic passing as deterministic logic (velocity + drag/tuning constants) so throws feel skill-based and repeatable.
+- Add core tunables in one place (`GameplayTuning.swift`): pocket collapse rate, sack radius, throw power curve, catch radius, defender cone width, perfect-release window.
+- Folder structure for scale:
+  - `Core/` (App entry, scene bootstrap, game loop, config)
+  - `Gameplay/Entities/` (QB, Receiver, Defender, Ball)
+  - `Gameplay/Systems/` (Input, AI, PhysicsContacts, Passing, PocketPressure)
+  - `Gameplay/States/` (GameStateMachine, PlayerStateMachine)
+  - `UI/HUD/` (score, down-distance, throw meter, prompts)
+  - `Content/Plays/` (route definitions, formations, JSON/plist data)
+  - `Content/Progression/` (upgrades, economy, difficulty curves)
+  - `VFX/`, `Audio/`, `Extensions/`, `Tools/Debug/`
+- Keep routes/data external (JSON/plist) instead of hardcoding, so adding new playbooks doesn’t require scene logic rewrites.
+- Add a debug overlay toggle (`FPS`, node count, physics bodies, catch zones, defender cones, pocket shape`) from the start to speed tuning.
+- MVP bootstrap order: 1) QB movement, 2) swipe throw, 3) 2 receivers + 2 routes, 4) one rusher + sack rule, 5) drive restart loop, 6) minimal HUD.
