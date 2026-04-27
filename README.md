@@ -1,4 +1,3 @@
 - 👋 Hi, I’m Bobby Rein
-- 👀 I’m interested in React and Next.js development. I like to build user-friendly and applications. I also would like to start building games on iOS.
-- 🌱 I’m currently learning how to develope scalable applications with React.
+- 👀 I’m interested in building iOS games using Swift
 - 📫 How to reach me: you can shoot me an email @ bobbyrein97@gmail.com
